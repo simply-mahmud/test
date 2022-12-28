@@ -1,15 +1,25 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnInit, Input } from '@angular/core';
 
 @Directive({
   selector: '[appCustomStyle]'
 })
 export class CustomStyleDirective implements OnInit {
 
+  @Input() color: string = "transparent";
+
   constructor(private el: ElementRef) {
-    (<HTMLElement>this.el.nativeElement).style.color = "red";
+
+  }
+
+  changeColor() {
+    if (this.el) {
+      this.el.nativeElement.style.color = this.color ?? "transparent";
+    }
   }
 
   ngOnInit(): void {
+
+    this.changeColor()
 
   }
 
